@@ -1,0 +1,44 @@
+
+FROM debian:latest
+
+RUN apt-get update
+RUN apt-get install -y varnish varnish-modules
+RUN apt-get install -y apache2
+RUN apt-get install -y php
+RUN apt-get install -y git
+RUN apt-get install -y gettext-base
+
+# Compile and install varnish vmod 'urlcode'.
+RUN apt-get install -y \
+    wget \
+    dpkg-dev \
+		libtool \
+		m4 \
+		automake \
+		pkg-config \
+		docutils-common \
+		libvarnishapi-dev
+RUN cd /tmp \
+		&& mkdir urlcode \
+		&& cd urlcode \
+		&& wget https://github.com/fastly/libvmod-urlcode/archive/master.tar.gz \
+		&& tar -xf master.tar.gz \
+		&& cd libvmod-urlcode-master \
+		&& sh autogen.sh \
+		&& ./configure \
+		&& make \
+		&& make install \
+		&& make check
+RUN a2dismod ssl
+
+# Expose HTTP/HTTPS
+EXPOSE 80
+EXPOSE 443
+
+# Use this image as base and configure/modify/run the following as needed:
+# 1) /etc/apache2/ports.conf                (apache listening ports)
+# 2) /etc/apache2/sites-available           (apache vhost config)
+# 3) /var/www/html                          (or whatever document root the vhost uses)
+# 4) apachectl configtest                   (test the apache config)
+# 5) /etc/varnish/default.vcl               (varnish config)
+# 6) varnishd -C -f /etc/varnish/default    (test the varnish config)

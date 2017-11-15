@@ -7,6 +7,7 @@ RUN apt-get install -y apache2
 RUN apt-get install -y php
 RUN apt-get install -y git
 RUN apt-get install -y gettext-base
+RUN apt-get install -y libcap2-bin
 
 # Compile and install varnish vmod 'urlcode'.
 RUN apt-get install -y \
@@ -31,9 +32,13 @@ RUN cd /tmp \
 		&& make check
 RUN a2dismod ssl
 
-# Expose HTTP/HTTPS
+RUN chmod -R a+rwX /var/log/apache2
+RUN chmod -R a+rwX /var/run/apache2
+RUN chmod -R a+rwX /var/lib/varnish/
+RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/varnishd
+
+# Expose HTTP
 EXPOSE 80
-EXPOSE 443
 
 # Use this image as base and configure/modify/run the following as needed:
 # 1) /etc/apache2/ports.conf                (apache listening ports)

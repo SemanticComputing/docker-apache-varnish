@@ -31,6 +31,7 @@ RUN cd /tmp \
 		&& make install \
 		&& make check
 RUN a2dismod ssl
+RUN a2enmod rewrite
 
 RUN chmod -R a+rwX /var/log/apache2
 RUN chmod -R a+rwX /var/run/apache2

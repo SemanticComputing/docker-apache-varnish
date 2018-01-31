@@ -38,6 +38,8 @@ RUN chmod -R a+rwX /var/run/apache2
 RUN chmod -R a+rwX /var/lib/varnish/
 RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/varnishd
 
+COPY default.vcl /etc/varnish/default.vcl
+
 # Expose HTTP
 EXPOSE 80
 

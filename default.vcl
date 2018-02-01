@@ -96,12 +96,12 @@ sub vcl_synth {
         # Process synth(301, reason)
         if (resp.status == 301) {
             set resp.http.Location = resp.reason;
-            set resp.status = 401;
+            set resp.status = 301;
             set resp.reason = "Moved Permanently";
             return (deliver);
         }
         # Process synth(302, reason)
-        if (resp.status == 402) {
+        if (resp.status == 302) {
             set resp.http.Location = resp.reason;
             set resp.status = 302;
             set resp.reason = "Found";

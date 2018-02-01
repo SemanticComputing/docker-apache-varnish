@@ -130,7 +130,7 @@ sub vcl_hit {
 # SITE SPECIFIC
 # Any site-specific configuration can be provided in /etc/varnish/site.vcl
 # Or if needed, this file (/etc/varnish/default.vcl) could be overridden as well.
-include "site.vcl"
+include "site.vcl";
 
 # TAIL
 

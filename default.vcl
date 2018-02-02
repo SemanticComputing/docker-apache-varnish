@@ -46,7 +46,7 @@ sub vcl_backend_response {
 }
 
 sub vcl_backend_error {
-        # Not quite sure what are these about
+        # Errors coming from different origin?
         set beresp.http.Access-Control-Allow-Origin = "*"; # allow all + basic authentication with CORS
         set beresp.http.Access-Control-Allow-Headers = "X-Requested-With, Content-Type, Authorization";
         set beresp.http.Access-Control-Allow-Methods = "HEAD, GET, POST, OPTIONS, PUT, DELETE";
@@ -77,7 +77,7 @@ sub vcl_backend_error {
 }
 
 sub vcl_synth {
-        # Not quite sure what are these about
+        # Synthetic response origin?
         set resp.http.Access-Control-Allow-Origin = "*"; # allow all + basic authentication with CORS
         set resp.http.Access-Control-Allow-Headers = "X-Requested-With, Content-Type, Authorization";
         set resp.http.Access-Control-Allow-Methods = "HEAD, GET, POST, OPTIONS, PUT, DELETE";

@@ -5,7 +5,6 @@ RUN apt-get update
 RUN apt-get install -y varnish varnish-modules
 RUN apt-get install -y apache2
 RUN apt-get install -y php
-RUN apt-get install -y php5
 RUN apt-get install -y git
 RUN apt-get install -y gettext-base
 RUN apt-get install -y libcap2-bin

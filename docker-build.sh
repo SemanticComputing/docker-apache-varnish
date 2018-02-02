@@ -1,3 +1,3 @@
 #! /bin/bash
 
-docker build -t apache-varnish .
+docker build --no-cache -t apache-varnish .

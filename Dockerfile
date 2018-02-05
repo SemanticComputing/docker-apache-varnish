@@ -33,6 +33,7 @@ RUN cd /tmp \
 RUN a2dismod ssl
 RUN a2enmod rewrite
 
+RUN chgrp -R root /var/log/apache2
 RUN chmod -R g+rwX /var/log/apache2
 RUN chmod -R g+rwX /var/run/apache2
 RUN chmod -R g+rwX /var/lib/varnish/
@@ -43,7 +44,7 @@ RUN touch /etc/varnish/site.vcl
 RUN chmod -R g+rwX /etc/varnish/site.vcl
 
 # Give access to write varnish logs at runtime
-RUN chown -R root:root /var/log/varnish
+RUN chgrp -R root /var/log/varnish
 RUN chmod -R g+rwX /var/log/varnish
 
 # Copy the main varnish configuration

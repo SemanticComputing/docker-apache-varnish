@@ -42,6 +42,10 @@ RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/varnishd
 RUN touch /etc/varnish/site.vcl
 RUN chmod -R g+rwX /etc/varnish/site.vcl
 
+# Give access to write varnish logs at runtime
+RUN chown -R root:root /var/log/varnish
+RUN chmod -R g+rwX /var/log/varnish
+
 # Copy the main varnish configuration
 COPY default.vcl /etc/varnish/default.vcl
 

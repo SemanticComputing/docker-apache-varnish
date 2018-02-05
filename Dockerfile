@@ -33,11 +33,16 @@ RUN cd /tmp \
 RUN a2dismod ssl
 RUN a2enmod rewrite
 
-RUN chmod -R a+rwX /var/log/apache2
-RUN chmod -R a+rwX /var/run/apache2
-RUN chmod -R a+rwX /var/lib/varnish/
+RUN chmod -R g+rwX /var/log/apache2
+RUN chmod -R g+rwX /var/run/apache2
+RUN chmod -R g+rwX /var/lib/varnish/
 RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/varnishd
 
+# Create empty file for the site specifiv varnish configuration and give runtime access to it
+RUN touch /etc/varnish/site.vcl
+RUN chmod -R g+rwX /etc/varnish/site.vcl
+
+# Copy the main varnish configuration
 COPY default.vcl /etc/varnish/default.vcl
 
 # Expose HTTP

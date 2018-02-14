@@ -74,7 +74,7 @@ sub vcl_backend_error {
             "}));
         }
         # Varnish rewrites backend errors by default. Prevent varnish from meddling with redirections
-        if (beresp.status ~ "^30[0-9]$") {
+        if ("" + beresp.status ~ "^30[0-9]$") {
             return(deliver);
         }
 }

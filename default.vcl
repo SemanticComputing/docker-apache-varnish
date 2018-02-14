@@ -57,7 +57,7 @@ sub vcl_backend_error {
 
         # Process synth(503, reason)
         if (beresp.status == 503) {
-                synthetic ({"<?xml version="1.0" encoding="utf-8"?>
+            return(synthetic ({"<?xml version="1.0" encoding="utf-8"?>
                     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
                     <html>
@@ -71,8 +71,11 @@ sub vcl_backend_error {
                             <p>Please try again in a couple of minutes and if the problem persists, contact <a href="mailto:seco-help@list.aalto.fi">seco-help@list.aalto.fi</a> in order to notify us of the situation.</p>
                         </body>
                     </html>
-            "});
-             return (deliver);
+            "}));
+        }
+        # Varnish rewrites backend errors by default. Prevent varnish from meddling with redirections
+        if (beresp.status ~ "^30[0-9]$") {
+            return(deliver);
         }
 }
 

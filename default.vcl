@@ -38,7 +38,13 @@ sub vcl_backend_response {
     set beresp.do_stream = true;
     set beresp.http.x-url = bereq.url;
     set beresp.http.x-host = bereq.http.host;
+
+    # Fix response protocol if https forwarding is used
+    if(bereq.http.X-Forwarded-Proto == "https" && regsub(beresp.http.Location, "^http://([^/]+)/.*", "\1") == bereq.http.Host ) {
+        set beresp.http.Location = regsub(beresp.http.Location, "^http://(.*)", "https://\1");
+    }
     
+    # Do not compress already compressed formats
     if (bereq.url ~ "\.(jpg|png|gif|gz|tgz|bz2|tbz|mp3|ogg)$") { 
         set beresp.do_gzip = false;
     }
@@ -72,10 +78,6 @@ sub vcl_backend_error {
                         </body>
                     </html>
             "});
-            return(deliver);
-        }
-        # Varnish rewrites backend errors by default. Prevent varnish from meddling with redirections
-        if (beresp.status >= 300 && beresp.status < 400) {
             return(deliver);
         }
 }

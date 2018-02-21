@@ -7,13 +7,7 @@ RUN apt-get install -y apache2
 RUN apt-get install -y git
 RUN apt-get install -y gettext-base
 RUN apt-get install -y libcap2-bin
-
-# Install php5 from jessie
-RUN echo "deb  http://deb.debian.org/debian jessie main" >> /etc/apt/sources.list
-RUN echo "deb-src  http://deb.debian.org/debian jessie main" >> /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get install -y php5
-RUN apt-get install -y libapache2-mod-php5
+RUN apt-get install -y php
 
 # Compile and install varnish vmod 'urlcode'.
 RUN apt-get install -y \

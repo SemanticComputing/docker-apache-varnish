@@ -4,7 +4,7 @@ FROM varnish
 RUN apt-get update
 RUN apt-get install -y apache2
 RUN apt-get install -y gettext-base
-RUN apt-get install -y libcap2-bin
+RUN apt-get install -y php
 
 # Install php5 from jessie
 RUN echo "deb  http://deb.debian.org/debian jessie main" >> /etc/apt/sources.list

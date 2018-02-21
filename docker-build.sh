@@ -10,4 +10,4 @@ while getopts ":c" opt; do
     esac
 done
 
-docker build $PARAMS -t apache-varnish-php .
+docker build $PARAMS -t apache-varnish .

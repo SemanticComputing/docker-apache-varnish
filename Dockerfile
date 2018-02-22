@@ -3,7 +3,6 @@ FROM varnish
 
 RUN apt-get update
 RUN apt-get install -y apache2
-RUN apt-get install -y php
 # envsubst from gettext-base can be used to replace environment variables in config files etc.
 RUN apt-get install -y gettext-base
 

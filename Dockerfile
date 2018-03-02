@@ -30,6 +30,6 @@ COPY ports.conf "$FILE_CONF_PORTS"
 # PERMISSIONS
 RUN mkdir -p "$PATH_VAR_APACHE"
 RUN mkdir -p "$APACHE_LOG_DIR"
-RUN chown -R www-data:root "$APACHE_LOG_DIR"
+RUN chgrp -R root "$APACHE_LOG_DIR"
 RUN chmod -R g=u "$APACHE_LOG_DIR"
 RUN chmod -R g=u "$PATH_VAR_APACHE"

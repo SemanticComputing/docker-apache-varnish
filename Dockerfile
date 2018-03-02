@@ -18,14 +18,18 @@ RUN a2enmod rewrite
 RUN a2enmod cgi
 
 # ENVIRONMENT VARIABLES
-ENV PATH_VAR_APACHE "/var/run/apache"
-ENV APACHE_LOG_DIR "/var/log/apache"
+ENV PATH_VAR_APACHE "/var/run/apache2"
+ENV APACHE_LOG_DIR "/var/log/apache2"
 ENV FILE_LOG_APACHE_ERROR "$APACHE_LOG_DIR/error.log"
 ENV FILE_LOG_APACHE_ACCESS "$APACHE_LOG_DIR/access.log"
+ENV FILE_CONF_PORTS "/etc/apache2/ports.conf"
+ENV FILE_CONF_VHOST "/etc/apache2/sites-available/000-default.conf"
+
+COPY ports.conf "$FILE_CONF_PORTS"
 
 # PERMISSIONS
 RUN mkdir -p "$PATH_VAR_APACHE"
 RUN mkdir -p "$APACHE_LOG_DIR"
-RUN chgrp -R root "$APACHE_LOG_DIR"
-RUN chmod -R u=g "$APACHE_LOG_DIR"
-RUN chmod -R u=g "$PATH_VAR_APACHE"
+RUN chown -R www-data:root "$APACHE_LOG_DIR"
+RUN chmod -R g=u "$APACHE_LOG_DIR"
+RUN chmod -R g=u "$PATH_VAR_APACHE"

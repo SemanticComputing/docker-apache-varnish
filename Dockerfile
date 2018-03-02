@@ -19,6 +19,8 @@ ENV FILE_LOG_APACHE_ACCESS "$APACHE_LOG_DIR/access.log"
 ENV FILE_CONF_PORTS "/etc/apache2/ports.conf"
 ENV FILE_CONF_VHOST "/etc/apache2/sites-available/000-default.conf"
 
+COPY ports.conf "$FILE_CONF_PORTS"
+
 # PERMISSIONS
 RUN mkdir -p "$PATH_VAR_APACHE"
 RUN mkdir -p "$APACHE_LOG_DIR"

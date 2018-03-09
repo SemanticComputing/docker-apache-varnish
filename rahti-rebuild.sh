@@ -1,7 +1,7 @@
 SERVER="https://rahti.csc.fi:8443"
 PROJECT_NAME="seco"
 
-APP_NAME="apache-varnish"
+APP_NAME="apache-varnish-php5"
 ENVIRONMENT="production"
 
 # Login if needed

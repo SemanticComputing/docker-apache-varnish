@@ -35,7 +35,7 @@ fi;
 
 # Check PersistentVolumeCLaim exists
 if [ "$PVC_NAME" != "" ]; then
-    oc get template "$PVC_NAME"
+    oc get pvc "$PVC_NAME"
     if [ $? != 0 ]; then
         echo "PersitentVolumeClaim $PVC_NAME missing from the OpenShift project. Create the volume claim first"
     fi;

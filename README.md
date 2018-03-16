@@ -14,6 +14,20 @@ ENV FILE_CONF_VHOST "/etc/apache2/sites-available/000-default.conf"
 You can use these in you downstream image for log locations
 
 
+## Pulling
+
+rahti-scripts is a submodule therefore you might want to use
+
+```
+git clone --recursive
+```
+and
+
+```
+git pull --recurse-submodules
+```
+
+
 ## Building
 
 ```

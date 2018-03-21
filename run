@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Print commands
+set -x
+
+# Start apache and varnish
+apachectl -d /etc/apache2/ -e info
+varnishd -f "$FILE_DEFAULT_VCL" -s "malloc,$MEM_VARNISH"
+
+# Write varnish log to /var/log/varnish/varnish.log
+varnishlog -Aw "$FILE_LOG_VARNISH" &
+
+# Make sure that log files exists
+touch "$FILE_LOG_VARNISH"
+touch "$FILE_LOG_APACHE_ACCESS"
+touch "$FILE_LOG_APACHE_ERROR"
+
+# Tail logs to stdout
+tail -f "$FILE_LOG_VARNISH" "$FILE_LOG_APACHE_ACCESS" "$FILE_LOG_APACHE_ERROR"

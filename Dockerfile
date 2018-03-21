@@ -22,6 +22,7 @@ ENV FILE_LOG_APACHE_ERROR "$APACHE_LOG_DIR/error.log"
 ENV FILE_LOG_APACHE_ACCESS "$APACHE_LOG_DIR/access.log"
 ENV FILE_CONF_PORTS "/etc/apache2/ports.conf"
 ENV FILE_CONF_VHOST "/etc/apache2/sites-available/000-default.conf"
+ENV PATH_HTML "/var/www/html"
 
 COPY ports.conf "$FILE_CONF_PORTS"
 
@@ -33,3 +34,9 @@ RUN chmod -R g=u "$APACHE_LOG_DIR"
 RUN chmod -R g=u "$PATH_VAR_APACHE"
 RUN touch "$FILE_CONF_PORTS"; chgrp root "$FILE_CONF_PORTS"; chmod -R g+rw "$FILE_CONF_PORTS"
 RUN touch "$FILE_CONF_VHOST"; chgrp root "$FILE_CONF_VHOST"; chmod -R g+rw "$FILE_CONF_VHOST"
+RUN mkdir -p "$PATH_HTML"; chgrp root "$PATH_HTML"; chmod -R g=u "$PATH_HTML"
+
+ENV RUN_APACHE_VARNISH /run-apache-varnish
+COPY run /run-apache-varnish
+
+ENTRYPOINT [ "/run-apache-varnish" ]

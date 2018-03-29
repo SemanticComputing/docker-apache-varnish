@@ -36,7 +36,8 @@ RUN touch "$FILE_CONF_PORTS"; chgrp root "$FILE_CONF_PORTS"; chmod -R g+rw "$FIL
 RUN touch "$FILE_CONF_VHOST"; chgrp root "$FILE_CONF_VHOST"; chmod -R g+rw "$FILE_CONF_VHOST"
 RUN mkdir -p "$PATH_HTML"; chgrp root "$PATH_HTML"; chmod -R g=u "$PATH_HTML"
 
-ENV RUN_APACHE_VARNISH /run-apache-varnish
+ENV FILE_RUN_APACHE_VARNISH_SH /run-apache-varnish.sh
+ENV EXEC_APACHE_VARNISH "exec $FILE_RUN_APACHE_VARNISH_SH"
 COPY run /run-apache-varnish
 
-ENTRYPOINT [ "/run-apache-varnish" ]
+ENTRYPOINT [ "/run-apache-varnish.sh" ]

@@ -11,7 +11,6 @@ ENV FILE_LOG_APACHE_ACCESS "$APACHE_LOG_DIR/access.log"
 ENV FILE_CONF_PORTS "/etc/apache2/ports.conf"
 ENV FILE_CONF_VHOST "/etc/apache2/sites-available/000-default.conf"
 ```
-You can use these in you downstream image for log locations
 
 
 ## Pulling

@@ -38,6 +38,6 @@ RUN mkdir -p "$PATH_HTML"; chgrp root "$PATH_HTML"; chmod -R g=u "$PATH_HTML"
 
 ENV FILE_RUN_APACHE_VARNISH_SH /run-apache-varnish.sh
 ENV EXEC_APACHE_VARNISH "exec $FILE_RUN_APACHE_VARNISH_SH"
-COPY run /run-apache-varnish
+COPY run "$FILE_RUN_APACHE_VARNISH_SH"
 
 ENTRYPOINT [ "/run-apache-varnish.sh" ]

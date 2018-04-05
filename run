@@ -3,6 +3,11 @@
 # Print commands
 set -x
 
+# Generate apache vhost conf if not exist
+if [ ! -s "$FILE_CONF_VHOST" ]; then    
+    bash "$FILE_GENERATE_CONF_VHOST_SH" > "$FILE_CONF_VHOST"
+fi
+
 # Start apache and varnish
 apachectl -d /etc/apache2/ -e info
 

@@ -5,7 +5,7 @@ APACHE_OPTIONS=${APACHE_OPTIONS:-"Indexes FollowSymLinks"}
 cat -  <<EOF
 <VirtualHost *:8080>
 	ServerAdmin webmaster@localhost
-	DocumentRoot /var/www/website
+	DocumentRoot /var/www/html
 
     <Directory />
         Options FollowSymLinks

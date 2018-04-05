@@ -5,14 +5,14 @@ APACHE_OPTIONS=${APACHE_OPTIONS:-"Indexes FollowSymLinks"}
 cat -  <<EOF
 <VirtualHost *:8080>
 	ServerAdmin webmaster@localhost
-	DocumentRoot /var/www/html
+	DocumentRoot ${PATH_HTML}
 
     <Directory />
         Options FollowSymLinks
         AllowOverride None
     </Directory>
 
-    <Directory /var/www/website>
+    <Directory ${PATH_HTML}>
         Options ${APACHE_OPTIONS}
         AllowOverride ${APACHE_ALLOW_OVERRIDE:-"None"}
         Order allow,deny

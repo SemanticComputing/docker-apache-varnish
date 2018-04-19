@@ -11,6 +11,7 @@ PORT="8080"
 NETWORK="seco"
 NETWORK_CIDR="172.30.20.0/22"
 CONTAINER_USER="1001"
+CONTAINER_PATH_HTML="/var/www/html"
 
 # DOCKER
 
@@ -22,6 +23,9 @@ if [ $? != 0 ]; then
     { set +x; } 2> /dev/null
 fi 
 
+mkdir -p vol-html
+chmod ug+rwX vol-html
+
 #Run the container
 set -x # print the next command
 docker run -it --rm \
@@ -31,5 +35,6 @@ docker run -it --rm \
 	--ip $IP \
 	--publish $PORT:$CONTAINER_PORT \
 	--expose $CONTAINER_PORT \
+    --mount "type=bind,source=$(pwd)/vol-html,target=$CONTAINER_PATH_HTML" \
 	$IMAGE_NAME	
 { set +x; } 2> /dev/null

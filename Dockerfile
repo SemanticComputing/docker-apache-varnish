@@ -1,4 +1,4 @@
-FROM varnish
+FROM secoresearch/varnish
 
 # INSTALL
 RUN apt-get update

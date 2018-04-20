@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 
 # Use this only for running individual containers locally
 # On cpouta use docker-compose
@@ -10,7 +10,7 @@ CONTAINER_PORT="80"
 PORT="8080"
 NETWORK="seco"
 NETWORK_CIDR="172.30.20.0/22"
-CONTAINER_USER="1001"
+CONTAINER_USER="$UID"
 CONTAINER_PATH_HTML="/var/www/html"
 
 # DOCKER

@@ -16,6 +16,8 @@ RUN a2enmod rewrite
 RUN a2enmod cgi
 
 # ENVIRONMENT VARIABLES
+ENV PATH_LOG_VARNISH "/var/log/varnish"
+ENV FILE_LOG_VARNISH "$PATH_LOG_VARNISH/varnish.log"
 ENV PATH_VAR_APACHE "/var/run/apache2"
 ENV APACHE_LOG_DIR "/var/log/apache2"
 ENV FILE_LOG_APACHE_ERROR "$APACHE_LOG_DIR/error.log"
@@ -31,6 +33,9 @@ COPY ports.conf "$FILE_CONF_PORTS"
 COPY generate-conf-vhost.sh "$FILE_GENERATE_CONF_VHOST_SH"
 
 # PERMISSIONS
+RUN mkdir -p "$PATH_LOG_VARNISH"
+RUN chgrp -R root "$PATH_LOG_VARNISH"
+RUN chmod -R g=u "$PATH_LOG_VARNISH"
 RUN mkdir -p "$PATH_VAR_APACHE"
 RUN mkdir -p "$APACHE_LOG_DIR"
 RUN chgrp -R root "$APACHE_LOG_DIR"

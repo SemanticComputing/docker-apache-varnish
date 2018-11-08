@@ -3,7 +3,7 @@
 # Use this only for running individual containers locally
 # On cpouta use docker-compose
 
-IMAGE_NAME="apache-varnish"
+IMAGE_NAME="apache-varnish-php5"
 CONTAINER_NAME="$IMAGE_NAME"
 IP="172.30.23.9"
 CONTAINER_PORT="80"

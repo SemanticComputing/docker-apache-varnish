@@ -13,10 +13,15 @@ apachectl -d /etc/apache2/ -e info
 
 # Start varnish
 $EXEC_VARNISH > "$FILE_LOG_VARNISH" &
+PID_VARNISH="$!"
 
 # Make sure that log files exists
 touch "$FILE_LOG_APACHE_ACCESS"
 touch "$FILE_LOG_APACHE_ERROR"
 
 # Tail logs to stdout
-exec tail -f "$FILE_LOG_VARNISH" "$FILE_LOG_APACHE_ACCESS" "$FILE_LOG_APACHE_ERROR"
+exec tail -f "$FILE_LOG_VARNISH" "$FILE_LOG_APACHE_ACCESS" "$FILE_LOG_APACHE_ERROR" &
+
+# Fail if any subprocesses exit
+wait -n
+exit 1

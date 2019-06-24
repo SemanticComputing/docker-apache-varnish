@@ -6,6 +6,7 @@ cat -  <<EOF
 <VirtualHost *:8080>
 	ServerAdmin webmaster@localhost
 	DocumentRoot ${PATH_HTML}
+	ServerName localhost
 
     <Directory />
         Options FollowSymLinks

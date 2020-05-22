@@ -8,7 +8,10 @@ if [ ! -s "$FILE_CONF_VHOST" ]; then
     bash "$FILE_GENERATE_CONF_VHOST_SH" > "$FILE_CONF_VHOST"
 fi
 
-# Start apache and varnish
+# Apache gets grumpy about PID files pre-existing
+rm -f $PATH_VAR_APACHE/apache2.pid
+
+# Start apache
 apachectl -d /etc/apache2/ -e info
 
 # Start varnish

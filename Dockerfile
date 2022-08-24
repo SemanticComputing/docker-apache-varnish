@@ -1,4 +1,5 @@
-FROM secoresearch/varnish
+ARG varnish_version=latest
+FROM secoresearch/varnish:${varnish_version}
 
 # INSTALL
 RUN apt-get update

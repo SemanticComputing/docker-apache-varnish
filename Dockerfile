@@ -9,8 +9,6 @@ RUN apt-get install -y php-xml
 RUN apt-get install -y php-mbstring
 RUN apt-get install -y php-curl
 RUN apt-get install -y php-zip
-# envsubst from gettext-base can be used to replace environment variables in config files etc.
-RUN apt-get install -y gettext-base
 
 RUN a2dismod ssl
 RUN a2enmod rewrite

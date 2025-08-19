@@ -15,7 +15,7 @@ RUN a2enmod rewrite
 RUN a2enmod cgi
 
 # add symlink /etc/php/current for not breaking docker child images' php configuration changes when php version is updated
-RUN ln -s /etc/php/7.4 /etc/php/current
+RUN ln -s /etc/php/8.4 /etc/php/current
 
 # ENVIRONMENT VARIABLES
 ENV PATH_LOG_VARNISH "/var/log/varnish"

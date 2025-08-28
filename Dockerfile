@@ -3,15 +3,15 @@ FROM secoresearch/varnish:${varnish_version}
 
 # INSTALL
 RUN apt-get update
-# PHP 8.0
+# PHP 8.1
 RUN apt-get install -y curl lsb-release
 RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
 RUN apt-get install -y apache2
-RUN apt-get install -y php8.0
-RUN apt-get install -y php8.0-xml
-RUN apt-get install -y php8.0-mbstring
-RUN apt-get install -y php8.0-curl
-RUN apt-get install -y php8.0-zip
+RUN apt-get install -y php8.1
+RUN apt-get install -y php8.1-xml
+RUN apt-get install -y php8.1-mbstring
+RUN apt-get install -y php8.1-curl
+RUN apt-get install -y php8.1-zip
 
 RUN a2dismod ssl
 RUN a2enmod rewrite

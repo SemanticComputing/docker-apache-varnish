@@ -14,8 +14,13 @@ RUN a2dismod ssl
 RUN a2enmod rewrite
 RUN a2enmod cgi
 
+ENV PATH_ETC_PHP /etc/php/8.4
+
+# set session.upload_progress.enabled=Off to fully protect from an unlikely RCE vector; see https://www.php.net/archive/2026.php#2026-10-23-1
+RUN sed -i 's/;session\.upload_progress\.enabled = On/session\.upload_progress\.enabled = Off/' "$PATH_ETC_PHP/apache2/php.ini"
+
 # add symlink /etc/php/current for not breaking docker child images' php configuration changes when php version is updated
-RUN ln -s /etc/php/8.4 /etc/php/current
+RUN ln -s "$PATH_ETC_PHP" /etc/php/current
 
 # ENVIRONMENT VARIABLES
 ENV PATH_LOG_VARNISH "/var/log/varnish"
